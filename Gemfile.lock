@@ -6,7 +6,6 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
-    ruby_cowsay (0.1.1)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -21,6 +20,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ruby_cowsay
   sinatra
   thin
