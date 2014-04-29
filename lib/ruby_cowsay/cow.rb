@@ -21,7 +21,7 @@ class Cow
   
   def initialize(options={})
     @cow_type = Cow.cows.include?(options[:cow]) ? options[:cow] : 'default'
-    require "#{File.expand_path(File.dirname(__FILE__))}/cows/#{@cow_type}"
+    load "#{File.expand_path(File.dirname(__FILE__))}/cows/#{@cow_type}.rb"
     Cow.class_eval 'include CowTemplate'
     @face_type = Cow.faces.include?(options[:face_type]) ? options[:face_type] : 'default'
     set_eyes_and_tongue!
