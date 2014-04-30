@@ -22,7 +22,7 @@ get "/" do
 end
 
 get "/fortune" do
-  msg       = Fortune.new.get
+  msg       = Fortune.get
   cow_type  = params[:cow] || "default"
   face_type = params[:face] || "default"
 
