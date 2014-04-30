@@ -109,28 +109,31 @@ class Cow
   
   def format_message(message)
     message_lines = []
-    if message.length > MAX_LINE_LENGTH
-      words, line = message.split, ""
-      for word in words
-        if line.length > 0 && (line.length + word.length) > MAX_LINE_LENGTH
-          message_lines << line
-          line = ""
+    message.split(/\n/).each do |message_line|
+      if message.length > MAX_LINE_LENGTH
+        words, line = message_line.split, ""
+        p words
+        p line
+        for word in words
+          if line.length > 0 && (line.length + word.length) > MAX_LINE_LENGTH
+            message_lines << line
+            line = ""
+          end
+          if word.length > MAX_LINE_LENGTH
+            broken_word = split_word(word)
+            line = broken_word.pop
+            message_lines = message_lines.concat(broken_word)
+          elsif line.length == 0
+            line = word
+          else
+            line = "#{line} #{word}"
+          end
         end
-        if word.length > MAX_LINE_LENGTH
-          broken_word = split_word(word)
-          line = broken_word.pop
-          message_lines = message_lines.concat(broken_word)
-        elsif line.length == 0
-          line = word
-        else
-          line = "#{line} #{word}"
-        end
+        message_lines << line
+      else
+        message_lines << message
       end
-      message_lines << line
-    else
-      message_lines << message
     end
-
     return message_lines
   end
   
