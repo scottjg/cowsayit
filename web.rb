@@ -12,7 +12,7 @@ get "/" do
     "\n" +
     "cows: #{Cow.cows.join(" ")}\n" +
     "\n" +
-    "faces: #{Cow.faces.join(" ")}" +
+    "faces: #{Cow.faces.join(" ")}"
 
   cow_type  = params[:cow] || "default"
   face_type = params[:face] || "default"
