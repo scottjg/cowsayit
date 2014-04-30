@@ -111,25 +111,27 @@ class Cow
     message_lines = []
     message.split(/\n/).each do |message_line|
       if message.length > MAX_LINE_LENGTH
-        words, line = message_line.split, ""
-        p words
-        p line
+        line = nil
+        words = message_line.split(/ /)
         for word in words
-          if line.length > 0 && (line.length + word.length) > MAX_LINE_LENGTH
-            message_lines << line
-            line = ""
+          if line && line.length > 0 && (line.length + word.length) > MAX_LINE_LENGTH
+            message_lines << (line || "")
+            line = nil
           end
           if word.length > MAX_LINE_LENGTH
             broken_word = split_word(word)
             line = broken_word.pop
             message_lines = message_lines.concat(broken_word)
-          elsif line.length == 0
-            line = word
           else
-            line = "#{line} #{word}"
+            if line.nil?
+              line = word
+            else
+              line = "#{line} #{word}"
+            end
           end
         end
-        message_lines << line
+        message_lines << (line || "")
+        line = nil
       else
         message_lines << message
       end
